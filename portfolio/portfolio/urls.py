@@ -23,6 +23,7 @@ urlpatterns = [
     path('productos/', views.productos),
     path('login/', views.login),
     path('resultado/', views.resultado),
-
+    path('eliminar/<codigo>', views.eliminarProducto),
+    path('crud/', views.crud),
 
 ]

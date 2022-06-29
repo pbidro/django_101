@@ -1,7 +1,8 @@
+from contextlib import redirect_stderr
 from django.http import HttpResponse
 import datetime
 from django.template import Template, Context
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from BaseDatos.models import Productos
 
 def saludo(request):
@@ -27,9 +28,18 @@ def productos(request):
   documento=plt.render(ctx)
   return HttpResponse(documento)
 
+def crud(request):
+  productos = Productos.objects.all()
+  contexto = {'productos':productos}
+  return render(request,"crud.html",contexto)
 
 def login(request):
   return render(request,"login.html")
+
+def eliminarProducto(request,codigo):
+  productos = Productos.objects.get(codigo=codigo)
+  productos.delete()
+  return redirect('crud/')
 
 def resultado(request):
   mensaje = f'se ha logeado el usuario {request.GET["correo"]}'
