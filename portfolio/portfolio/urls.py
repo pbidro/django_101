@@ -23,7 +23,8 @@ urlpatterns = [
     path('productos/', views.productos),
     path('login/', views.login),
     path('resultado/', views.resultado),
-    path('eliminar/<codigo>', views.eliminarProducto),
+    path('eliminarProducto/<codigo>', views.eliminarProducto),
+    path('crearProducto', views.crearProducto),
     path('crud/', views.crud),
 
 ]

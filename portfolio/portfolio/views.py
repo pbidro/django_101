@@ -4,6 +4,8 @@ import datetime
 from django.template import Template, Context
 from django.shortcuts import render, redirect
 from BaseDatos.models import Productos
+import random
+
 
 def saludo(request):
   
@@ -39,7 +41,18 @@ def login(request):
 def eliminarProducto(request,codigo):
   productos = Productos.objects.get(codigo=codigo)
   productos.delete()
-  return redirect('crud/')
+  return redirect('/crud/')
+
+def crearProducto(request):
+  Productos.objects.create(codigo=random.randint(7, 45),
+                          nombre="objeto random",
+                          descripcion="descripcion random",
+                          disponible = 1,
+                          fechaIncorporacion = "2022-02-02",
+                          correoProveedor = "pablekereke@adsfa.cl"
+                               )
+
+  return redirect('/crud/')
 
 def resultado(request):
   mensaje = f'se ha logeado el usuario {request.GET["correo"]}'
